@@ -6,7 +6,7 @@ const verde = document.getElementById('verde');
 const btnEmpezar = document.getElementById('btnEmpezar') // 6.- Para poder ocultar el boton, lo primero que debemos hacer es recibir la señal que nos lleve el id
                                                          //  desde btnEmpezar en el html
 
-const ULTIMO_NIVEL = 10;
+const ULTIMO_NIVEL = 10
 
 class Juego {               // 3.- Creamos la clase juego con su constructor
     constructor() {
@@ -52,7 +52,7 @@ class Juego {               // 3.- Creamos la clase juego con su constructor
     }
 
     siguienteNivel() {
-        this.subnivel = 0;
+        this.subnivel = 0
         this.iluminarSecuencia(); // 13.- Invocamos la función iluminarSecuencia(), es decir, cada vez que llegue un nuevo nivel, se va a iluminar la secuencia
         this.agregarEventosClick(); // 21.- Debemos verificar que los botones que pulse el jugador son correctos, asique empezamos agregando eventos a los clicks
     }
@@ -101,20 +101,21 @@ class Juego {               // 3.- Creamos la clase juego con su constructor
     }
 
     agregarEventosClick() {
-        this.colores.celeste.addEventListener('click', this.elegirColor.bind(this)) // 22.- Agregamos un escuchador de eventos en cada uno de los colores
-        this.colores.violeta.addEventListener('click', this.elegirColor.bind(this))
-        this.colores.naranja.addEventListener('click', this.elegirColor.bind(this)) 
-        this.colores.verde.addEventListener('click', this.elegirColor.bind(this))
+        this.colores.celeste.addEventListener('click', this.elegirColor) // 22.- Agregamos un escuchador de eventos en cada uno de los colores
+        this.colores.verde.addEventListener('click', this.elegirColor)
+        this.colores.violeta.addEventListener('click', this.elegirColor)
+        this.colores.naranja.addEventListener('click', this.elegirColor)
     }
 
     eliminarEventosClick() {
-        this.colores.celeste.removeEventListener('click', this.elegirColor.bind(this))
-        this.colores.violeta.removeEventListener('click', this.elegirColor.bind(this))
-        this.colores.naranja.removeEventListener('click', this.elegirColor.bind(this)) 
-        this.colores.verde.removeEventListener('click', this.elegirColor.bind(this))
+        this.colores.celeste.removeEventListener('click', this.elegirColor)
+        this.colores.verde.removeEventListener('click', this.elegirColor)
+        this.colores.violeta.removeEventListener('click', this.elegirColor)
+        this.colores.naranja.removeEventListener('click', this.elegirColor)
     }
 
     elegirColor(ev) { // 24.- Utilizamos ev como parametro pues hace refencia a lo captado en el EventListener
+        console.log(this)
         const nombreColor = ev.target.dataset.color; // 26.- target.dataset.color hace refencia al contenido del campo color dentro del dataset de cada uno de los botones,
                                                      // campo que creamos nosotros poniendo en el html el atributo data-color (lineas 10, 11, 12 y 13) y que podemos ver si
                                                      // inspeccionamos los botones en el navegador, dentro del atributo target
@@ -123,7 +124,7 @@ class Juego {               // 3.- Creamos la clase juego con su constructor
         this.iluminarColor(nombreColor);                               // 28.- iluminamos el boton pulsado
 
         if (numeroColor === this.secuencia[this.subnivel]) {     // 29.- Si el boton pulsado es igual al mostrado, el nivel en el que nos encontramos (nivel 0 o subnivel) avanza
-            this.subnivel++;
+            this.subnivel++
             if (this.subnivel === this.nivel) {     // 30.- si avanza el subnivel, avanza el nivel de los colores
                 this.nivel++
                 this.eliminarEventosClick(); // 31.- eliminamos la posibilidad de hacer click una vez hemos acertado todos los colores
@@ -154,5 +155,5 @@ class Juego {               // 3.- Creamos la clase juego con su constructor
 }
 
 function empezarJuego() {    // 1.- creamos la función que va a ser llamada desde el html al pulsar el boton de inicio
-    var juego = new Juego()  // 2.- para que esto se cree y funciona, debemos crear la clase Juego
+    window.juego = new Juego()  // 2.- para que esto se cree y funciona, debemos crear la clase Juego
 }
